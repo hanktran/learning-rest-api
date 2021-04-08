@@ -1,4 +1,5 @@
 const express = require('express');
+const mongoose = require('mongoose');
 
 const feedRoutes = require('./routes/feed');
 
@@ -15,4 +16,11 @@ app.use((req, res, next) => {
 
 app.use('/feed', feedRoutes);
 
-app.listen(8080);
+mongoose
+  .connect(
+    'mongodb+srv://hantran:5s1rGj0be8BPwFRu@cluster0.rsvwc.mongodb.net/post?retryWrites=true&w=majority'
+  )
+  .then(result => {
+    app.listen(8080);
+  })
+  .catch(error => console.log(error));
